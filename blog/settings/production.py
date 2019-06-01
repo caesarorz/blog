@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'post',
     'subscription',
     # third party
+    'storages',
     'tinymce',
     'crispy_forms',
 ]
@@ -160,6 +161,9 @@ TINYMCE_DEFAULT_CONFIG = {
     'menubar': True,
     'statusbar': True,
 }
+
+
+from blog.aws.conf import 
 
 
 # let's encrypt ssl/tls

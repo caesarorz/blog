@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'post',
     'subscription',
     # third party
+    'storages',
     'tinymce',
     'crispy_forms',
 ]

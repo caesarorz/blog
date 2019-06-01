@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'post',
     'subscription',
     # third party
+    'storages',
     'tinymce',
     'crispy_forms',
 ]
@@ -129,7 +130,7 @@ MEDIA_ROOT = os.path.join(ROOT_STATIC, "media_root")
 
 # let's encrypt
 
-# from ecommerce.aws.conf import *
+from blog.aws.conf import *
 
 CORS_REPLACE_HTTPS_REFERER      = False
 HOST_SCHEME                     = "http://"

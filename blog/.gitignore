@@ -1,6 +1,11 @@
 # local and base settings file
 blog/settings/local.py
 blog/settings/base.py
-
+blog/settings.py.back
+blog/settings/__init__.py
 # static local files
 # src/static/
+
+# app info
+
+info_project/
