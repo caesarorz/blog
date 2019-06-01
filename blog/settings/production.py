@@ -131,6 +131,9 @@ STATICFILES_DIRS = [
 STATIC_ROOT = os.path.join(ROOT_STATIC, 'static_root')
 MEDIA_ROOT = os.path.join(ROOT_STATIC, "media_root")
 
+#aws configuration
+from blog.aws.conf import *
+
 
 # tyni mce: https://www.tiny.cloud/
 # guide: https://fosstack.com/how-to-set-up-tinymce-in-django-app/
@@ -161,9 +164,6 @@ TINYMCE_DEFAULT_CONFIG = {
     'menubar': True,
     'statusbar': True,
 }
-
-
-from blog.aws.conf import *
 
 
 # let's encrypt ssl/tls
