@@ -1,0 +1,6 @@
+# local and base settings file
+blog/settings/local.py
+blog/settings/base.py
+
+# static local files
+# src/static/
