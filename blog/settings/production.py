@@ -163,7 +163,7 @@ TINYMCE_DEFAULT_CONFIG = {
 }
 
 
-from blog.aws.conf import 
+from blog.aws.conf import *
 
 
 # let's encrypt ssl/tls
