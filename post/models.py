@@ -3,6 +3,13 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django.urls import reverse
 
+import os
+import random
+import string
+import datetime
+from django.utils import timezone
+from django.utils.text import slugify
+
 User = get_user_model()
 
 
@@ -63,3 +70,25 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.user.username
+
+
+
+
+def random_string_generator(size=10,chars=string.ascii_lowercase + string.digits):
+	return ''.join(random.choice(chars) for _ in range(size))
+
+
+def upload_file_loc(instance, filename):
+    folder_loc = random_string_generator()
+    if instance:
+        location = "documents/{}_{}/".format(instance.title, folder_loc)
+    return location + filename
+
+class Document(models.Model):
+    title = models.CharField(max_length=100)
+    description = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+    file = models.FileField(upload_to=upload_file_loc)
+
+    def __str__(self):
+        return self.title
