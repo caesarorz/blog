@@ -130,6 +130,8 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT = os.path.join(ROOT_STATIC, 'static_root')
 MEDIA_ROOT = os.path.join(ROOT_STATIC, "media_root")
+PROTECTED_ROOT = os.path.join(ROOT_STATIC, "protected_media")
+
 
 #aws configuration
 from blog.aws.conf import *
