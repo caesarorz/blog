@@ -11,6 +11,7 @@ from post.views import (
     post_delete,
     post_update,
     post_create,
+    DownloadDocs
 )
 
 
@@ -23,6 +24,7 @@ urlpatterns = [
     path('create/', post_create, name='post-create'),
     path('post/<id>/update/', post_update, name='post-update'),
     path('post/<id>/delete/', post_delete, name='post-delete'),
+    path('post/document/<id>/', DownloadDocs.as_view(), name='download'),
     path('tinymce/', include('tinymce.urls')),
 ]
 
