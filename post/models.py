@@ -157,20 +157,20 @@ class Document(models.Model):
         return get_filename(self.file.name)
 
 
-class DocumentDownload(models.Model):
-    title = models.CharField(max_length=100)
-    document = models.ForeignKey(Document, on_delete=models.CASCADE)
-    file = models.FileField(
-        upload_to=upload_file_loc, 
-        storage=FileSystemStorage(location=settings.PROTECTED_ROOT))
+# class DocumentDownload(models.Model):
+#     title = models.CharField(max_length=100)
+#     document = models.ForeignKey(Document, on_delete=models.CASCADE)
+#     file = models.FileField(
+#         upload_to=upload_file_loc, 
+#         storage=FileSystemStorage(location=settings.PROTECTED_ROOT))
 
 
-    def __str__(self):
-        return str(self.file.name)
+#     def __str__(self):
+#         return str(self.file.name)
 
-    def get_download_url(self):
-        return reverse("download", kwargs={"id": self.id})
+#     def get_download_url(self):
+#         return reverse("download", kwargs={"id": self.id})
 
-    @property
-    def name(self):
-        return get_filename(self.file.name)
+#     @property
+#     def name(self):
+#         return get_filename(self.file.name)

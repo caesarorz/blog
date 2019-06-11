@@ -4,7 +4,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.views.generic import CreateView, View
 
-from .models import Post, Author, Document, DocumentDownload
+from .models import Post, Author, Document #DocumentDownload
 from subscription.models import Signup
 from .forms import CommentForm, PostForm
 
