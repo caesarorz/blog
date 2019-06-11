@@ -4,8 +4,8 @@
 import datetime
 import os
 
-AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID", "AKIA573FFIJDUS32WNI3")
-AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY", "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")
+AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID", "##")
+AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY", "##")
 AWS_USERNAME = "landing"
 AWS_GROUP_NAME = "landing-group"
 
