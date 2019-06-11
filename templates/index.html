@@ -55,8 +55,23 @@
                     <li>Priority email support</li>
                     <li>Help center access</li>
                   </ul> {% endcomment %}
-                  <h4 class="card-title pricing-card-title"> <small class="text-muted">Hit the button below to download it.</small></h4>
-                  <button type="button" class="btn btn-lg btn-block btn-primary">Download</button>
+                  <h4 class="card-title pricing-card-title"> <small class="text-muted">Please choose your favorite language. Then hit download.</small></h4>
+                  {% comment %} <div class="control-group">
+                      <label class="control control--radio">English
+                        <input type="radio" name="radio" id="radio_en" value="en" checked="checked"/>
+                        <div class="control__indicator"></div>
+                      </label>
+                      <label class="control control--radio">Spanish
+                        <input type="radio" name="radio" id="radio_es" value="es"/>
+                        <div class="control__indicator"></div>
+                      </label>
+                  </div>               {% endcomment %}
+                  {% for doc in docs %}
+                    {% if doc.title == "myresume" %}   
+                      {% comment %} <button type="button" class="btn btn-lg btn-block btn-primary download-btn"><a href="{{ doc.get_download_url }}">Download</a> <i class="fa fa-spinner w3-spin hidden"></i></button> {% endcomment %}
+                      <button type="button" id="download-btn" class="btn btn-lg btn-block btn-primary"><a href="{{ doc.generate_download_url }}">Download</a> <i class="fa fa-spinner w3-spin hidden"></i></button>
+                    {% endif %}
+                  {% endfor %}
                 </div>
               </div>
               <div class="card mb-4 shadow-sm">
@@ -64,12 +79,9 @@
                   <h4 class="my-0 font-weight-normal">Projects</h4>
                 </div>
                 <div class="card-body">
-                  <h1 class="card-title pricing-card-title">$29 <small class="text-muted">/ mo</small></h1>
+                  <h1 class="card-title pricing-card-title"><small class="text-muted">mo</small></h1>
                   <ul class="list-unstyled mt-3 mb-4">
-                    <li>30 users included</li>
-                    <li>15 GB of storage</li>
-                    <li>Phone and email support</li>
-                    <li>Help center access</li>
+                    <li>Sorry for the inconvenience. No ready yet!</li>
                   </ul>
                   <button type="button" class="btn btn-lg btn-block btn-primary">Contact us</button>
                 </div>

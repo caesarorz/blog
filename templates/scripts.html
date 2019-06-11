@@ -7,3 +7,24 @@
     <script src="{% static 'vendor/@fancyapps/fancybox/jquery.fancybox.min.js' %}"></script>
     <script src="{% static 'js/front.js'%}"></script>
     <script src="{% static 'js/highlight.pack.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+
+    <script>
+
+        w3spin = document.querySelector(".w3-spin");
+        document.getElementById("download-btn").onclick = function() {downloadFile()};
+
+        function downloadFile() {
+            w3spin.classList.remove("hidden"); 
+            setTimeout(openFile, 1500);           
+        }
+    
+        function openFile() {
+            w3spin.classList.add("hidden");
+        };
+
+        {% comment %} radiobtn = document.querySelector("input[name=radio]:checked").value;
+        console.log(radiobtn); {% endcomment %}
+
+
+    </script>

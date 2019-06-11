@@ -13,7 +13,7 @@ AWS_FILE_EXPIRE = 200
 AWS_PRELOAD_METADATA = True
 AWS_QUERYSTRING_AUTH = False
 # AWS_QUERYSTRING_AUTH = True
-
+AWS_DEFAULT_ACL = None
 
 DEFAULT_FILE_STORAGE = 'blog.aws.utils.MediaRootS3BotoStorage'
 STATICFILES_STORAGE = 'blog.aws.utils.StaticRootS3BotoStorage'
@@ -33,3 +33,11 @@ AWS_HEADERS = {
     'Expires': expires,
     'Cache-Control': 'max-age=%d' % (int(two_months.total_seconds()), ),
 }
+
+
+# https://www.codingforentrepreneurs.com/blog/download-aws-s3-files-python-django-boto/ 
+
+PROTECTED_DIR_NAME = 'protected'
+PROTECTED_MEDIA_URL = '//%s.s3.amazonaws.com/%s/' %( AWS_STORAGE_BUCKET_NAME, PROTECTED_DIR_NAME)
+
+AWS_DOWNLOAD_EXPIRE = 5000 #(0ptional, in milliseconds)

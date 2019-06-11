@@ -1,16 +1,16 @@
+from django.http import HttpResponse, Http404
 from django.db.models import Count, Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, get_object_or_404, redirect, reverse
+from django.views.generic import CreateView, View
 
-from .models import Post, Author
+from .models import Post, Author, Document, DocumentDownload
 from subscription.models import Signup
 from .forms import CommentForm, PostForm
 
 
 def get_author(user):
-    print("user******** ", user)
     qs = Author.objects.filter(user=user)
-    print("***********qs ", qs)
     if qs.exists():
         return qs[0]
     return None
@@ -41,6 +41,10 @@ def get_category_count():
 def index(request):
     featured = Post.objects.filter(featured=True)
     latest = Post.objects.order_by('-timestamp')[0:3]
+    documents = Document.objects.all().filter(title__icontains="myresume")
+    # print("resume ", documents.generate_download_url())
+    for doc in documents:
+        print(doc.generate_download_url())
 
     if request.method == "POST":
         email = request.POST["email"]
@@ -50,7 +54,8 @@ def index(request):
 
     context = {
         'object_list': featured,
-        'latest': latest
+        'latest': latest,
+        'docs': documents,
     }
     return render(request, "index.html", context)
 
@@ -109,9 +114,7 @@ def post(request, id):
 def post_create(request):
     title = 'Create'
     form = PostForm(request.POST or None, request.FILES or None)
-    print("***************** ", request.user)
     author = get_author(request.user)
-    print("*********author ", author)
     if request.method == "POST":
         if form.is_valid():
             form.instance.author = author
@@ -134,9 +137,7 @@ def post_update(request, id):
         request.FILES or None,
         instance=post
     )
-    print("***************** ", request.user)
     author = get_author(request.user)
-    print("*********author ", author)
     if request.method == "POST":
         if form.is_valid():
             form.instance.author = author
@@ -155,3 +156,33 @@ def post_delete(request, id):
     post = get_object_or_404(Post, id=id)
     post.delete()
     return redirect(reverse("post-list"))
+
+import os
+from wsgiref.util import FileWrapper
+from django.conf import settings
+from mimetypes import guess_type
+
+class DownloadDocs(View):
+    def get(self, *args, **kwargs):
+        pk = kwargs.get("id")
+        qs = Document.objects.filter(title__icontains="myresume")
+        # print(qs)
+        if qs.count() != 1:
+            raise Http404("Document not found")
+        document_obj = qs.first()
+        file_root = settings.PROTECTED_ROOT
+        filepath = document_obj.file.path         
+        final_path = os.path.join(file_root, filepath)
+
+        with open(final_path, 'rb') as f:
+            wrapper = FileWrapper(f)
+            content = "This is an example"
+            mimetype = "application/force-download"
+            guess_mimetype = guess_type(filepath)[0]
+            if guess_mimetype:
+                mimetype = guess_mimetype
+            # response = HttpResponse(download_obj.get_download_url())
+            response = HttpResponse(wrapper, content_type=mimetype)
+            response["Content-Disposition"] = "attachment;filename={}".format(document_obj.name)
+            response["X-SendFile"] = str(document_obj.name)
+            return response
